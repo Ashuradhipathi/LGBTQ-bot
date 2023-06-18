@@ -272,6 +272,12 @@ def community_or_event(doc):
     if (not comm_presence and not loc_presence) and (not event_presence and not  location_presence):
             coh(message)
 
+def coh(msg):
+        co = cohere.Client('') # Enter your CoHere API key
+        response_coh = co.generate(model='command',prompt=msg,max_tokens=300,temperature=0.9,k=0,stop_sequences=[],return_likelihoods='NONE')
+        response=('Prediction: {}'.format(response_coh.generations[0].text))
+        return response
+
 
 
 
@@ -299,9 +305,5 @@ while(check):
         else:
                 print("Hope to see you again")
                 check=False
-def coh(msg):
-        co = cohere.Client('') # Enter your CoHere API key
-        response_coh = co.generate(model='command',prompt=msg,max_tokens=300,temperature=0.9,k=0,stop_sequences=[],return_likelihoods='NONE')
-        response=('Prediction: {}'.format(response_coh.generations[0].text))
-        return response
+
 
